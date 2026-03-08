@@ -1,267 +1,465 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RV Park Acquisitions | Premium Creative Deals Nationwide</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RV Park Acquisitions | Creative Closings Nationwide</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
   <style>
-    .hero-bg { background-image: url('https://picsum.photos/id/1015/1920/1080'); background-size: cover; background-position: center; }
-    .tab-active { border-bottom: 4px solid #166534; color: #166534; font-weight: 800; }
-    .success-modal { animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
-    @keyframes popIn { from { transform: scale(0.7) translateY(20px); opacity: 0; } to { transform: scale(1) translateY(0); opacity: 1; } }
-    /* Premium touch: smoother shadows, refined borders */
-    input, select, textarea { transition: all 0.3s ease; }
-    input:focus, select:focus, textarea:focus { border-color: #166534; box-shadow: 0 0 0 3px rgba(22,101,52,0.2); outline: none; }
+    :root {
+      --emerald-deep: #0f3d35;
+      --emerald: #166534;
+      --emerald-soft: #1f7a67;
+      --orange: #c85a14;
+      --orange-hover: #a9480f;
+      --cream: #f7f4ee;
+      --ink: #13221d;
+    }html { scroll-behavior: smooth; }
+body { color: var(--ink); }
+
+.hero-bg {
+  background-image:
+    linear-gradient(90deg, rgba(8,20,18,.82) 0%, rgba(8,20,18,.68) 36%, rgba(8,20,18,.28) 62%, rgba(8,20,18,.15) 100%),
+    url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=80');
+  background-size: cover;
+  background-position: center;
+}
+
+.glass {
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.14);
+}
+
+.soft-card {
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.45);
+  box-shadow: 0 16px 50px rgba(15, 61, 53, 0.12);
+}
+
+.trust-card {
+  background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(247,244,238,.92));
+  border: 1px solid rgba(15,61,53,.08);
+  box-shadow: 0 10px 35px rgba(15,61,53,.08);
+}
+
+.tab-active {
+  color: var(--emerald);
+  border-color: var(--emerald);
+  background: white;
+  font-weight: 800;
+}
+
+.success-modal { animation: popIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes popIn {
+  from { transform: scale(0.92) translateY(18px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+input, select, textarea {
+  transition: all .25s ease;
+  background: rgba(255,255,255,.96);
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--emerald);
+  box-shadow: 0 0 0 4px rgba(22,101,52,.12);
+  outline: none;
+}
+
+.hero-check li { position: relative; padding-left: 2.1rem; }
+.hero-check li::before {
+  content: '\f00c';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  position: absolute;
+  left: 0;
+  top: .05rem;
+  color: #d9f99d;
+}
+
+.section-anchor { scroll-margin-top: 96px; }
+
   </style>
 </head>
-<body class="bg-gray-50 font-sans text-gray-900 antialiased">
-
-  <!-- Navbar – Premium, sticky, subtle shadow -->
-  <nav class="bg-white shadow-md sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-      <div class="flex items-center gap-4">
-        <img id="logo" src="https://via.placeholder.com/150x50?text=RV+Park+Acq" alt="RV Park Acquisitions" class="h-12 w-auto">
-        <div class="flex flex-col">
-          <span class="text-2xl font-extrabold tracking-tight text-emerald-900">RV Park</span>
-          <span class="text-2xl font-extrabold tracking-tight text-orange-700 -mt-2">Acquisitions</span>
+<body class="bg-stone-50 font-sans antialiased">  <nav class="bg-white/95 backdrop-blur-md border-b border-black/5 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-5 md:px-6 py-4 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3 min-w-0">
+        <div class="h-11 w-11 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center justify-center shrink-0">
+          <i class="fa-solid fa-van-shuttle text-xl text-emerald-800"></i>
         </div>
-      </div>
-      <div class="hidden md:flex items-center gap-10 text-base font-semibold">
-        <a href="#seller" onclick="switchTab(0)" class="hover:text-emerald-800 transition">For Sellers & Brokers</a>
-        <a href="#buyer" onclick="switchTab(1)" class="hover:text-emerald-800 transition">For Buyers</a>
-        <a href="#how" class="hover:text-emerald-800 transition">How It Works</a>
-      </div>
-      <a href="tel:+14015551234" class="bg-emerald-800 hover:bg-emerald-900 text-white px-8 py-4 rounded-full font-bold text-lg flex items-center gap-3 shadow-md transition min-w-[180px] justify-center min-h-[56px]">
-        <i class="fa-solid fa-phone"></i> Call Us
+        <div class="leading-none min-w-0">
+          <div class="text-xl md:text-2xl font-black tracking-tight text-emerald-950">RV Park</div>
+          <div class="text-xl md:text-2xl font-black tracking-tight text-orange-700 -mt-1">Acquisitions</div>
+        </div>
+      </div><div class="hidden lg:flex items-center gap-8 text-[15px] font-semibold text-slate-700">
+    <a href="#seller" onclick="switchTab(0)" class="hover:text-emerald-800 transition">For Sellers & Brokers</a>
+    <a href="#buyer" onclick="switchTab(1)" class="hover:text-emerald-800 transition">For Buyers</a>
+    <a href="#why-us" class="hover:text-emerald-800 transition">Why Owners Call Us</a>
+    <a href="#how" class="hover:text-emerald-800 transition">How It Works</a>
+  </div>
+
+  <a href="tel:+14015551234" class="bg-orange-700 hover:bg-orange-800 text-white px-5 md:px-7 py-3.5 rounded-full font-bold text-base md:text-lg flex items-center gap-3 shadow-lg shadow-orange-900/15 transition whitespace-nowrap">
+    <i class="fa-solid fa-phone"></i>
+    <span>Call Us</span>
+  </a>
+</div>
+
+  </nav>  <header class="hero-bg min-h-screen flex items-center text-white relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-5 md:px-6 relative z-10 py-16 md:py-24 w-full">
+      <div class="max-w-4xl">
+        <div class="inline-flex items-center gap-3 glass px-4 md:px-6 py-3 rounded-full text-sm md:text-base font-semibold mb-6 md:mb-8 shadow-lg">
+          <i class="fa-solid fa-shield-halved text-lime-300"></i>
+          Brokers: Commissions Secured in Writing
+        </div><h1 class="text-4xl sm:text-5xl lg:text-7xl font-black leading-[0.96] tracking-tight mb-6">
+      Sell Your RV Park
+      <span class="block">Without Banks,</span>
+      <span class="block text-orange-400">Broken Deals, or Guesswork.</span>
+    </h1>
+
+    <p class="text-lg sm:text-xl md:text-2xl text-white/90 max-w-3xl mb-8 md:mb-10 leading-relaxed">
+      We structure creative acquisitions using partial cash + seller financing so owners can exit smoothly, brokers can stay protected, and qualified buyers can close confidently.
+    </p>
+
+    <ul class="hero-check grid md:grid-cols-2 gap-3 md:gap-4 text-white/95 text-base md:text-lg mb-10 max-w-3xl">
+      <li>Nationwide buyer network</li>
+      <li>Creative financing specialists</li>
+      <li>Broker commissions protected</li>
+      <li>Targeting 16,000+ independent parks</li>
+    </ul>
+
+    <div class="flex flex-col sm:flex-row gap-4 md:gap-5 mb-8">
+      <a href="#seller" onclick="switchTab(0)" class="bg-orange-700 hover:bg-orange-800 text-white px-8 md:px-10 py-4 md:py-5 rounded-full text-lg md:text-xl font-bold shadow-xl shadow-orange-950/20 transition text-center">
+        Sell My RV Park
+      </a>
+      <a href="#buyer" onclick="switchTab(1)" class="bg-emerald-700 hover:bg-emerald-800 text-white px-8 md:px-10 py-4 md:py-5 rounded-full text-lg md:text-xl font-bold shadow-xl shadow-emerald-950/20 transition text-center">
+        Submit Your Buy Box
       </a>
     </div>
-  </nav>
 
-  <!-- Hero – Premium copy, larger text, reassuring -->
-  <header class="hero-bg min-h-screen flex items-center text-white relative">
-    <div class="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-transparent"></div>
-    <div class="max-w-6xl mx-auto px-6 relative z-10 py-20">
-      <div class="max-w-3xl">
-        <div class="inline-flex items-center gap-3 bg-white/25 backdrop-blur-lg px-6 py-3 rounded-full text-base font-medium mb-8">
-          <i class="fa-solid fa-shield-check text-emerald-300"></i> Brokers: Commissions Secured in Writing
-        </div>
-        <h1 class="text-5xl md:text-7xl font-extrabold leading-tight tracking-tight mb-8">
-          Premium RV Parks<br>Traditional Banks Avoid.<br>
-          <span class="text-orange-400">We Close Them Elegantly.</span>
-        </h1>
-        <p class="text-2xl md:text-3xl text-white/90 mb-12 font-light">
-          Retiring owners, complex books, or legacy financing challenges? We specialize in proven creative structures — partial cash + secure seller carry — delivering closer to your goals while enabling buyers to optimize and refinance confidently.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-6">
-          <button onclick="switchTab(0)" class="bg-orange-700 hover:bg-orange-800 text-white px-12 py-6 rounded-full text-xl font-bold shadow-lg transition min-h-[64px] flex items-center justify-center gap-3">
-            Sell or Broker Your Park
-          </button>
-          <button onclick="switchTab(1)" class="bg-white/90 hover:bg-white text-emerald-900 px-12 py-6 rounded-full text-xl font-bold shadow-lg transition min-h-[64px] flex items-center justify-center gap-3">
-            Define My Premium Buy Box
-          </button>
-        </div>
-        <p class="mt-10 text-white/80 text-base">Nationwide • Targeting \~16,000+ independent parks • Rhode Island roots, trusted coast-to-coast network</p>
-      </div>
-    </div>
-  </header>
-
-  <!-- Trust bar – More premium icons/spacing -->
-  <div class="bg-white py-10 border-b">
-    <div class="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-16 text-base text-gray-600 font-medium">
-      <div class="flex items-center gap-4"><i class="fa-solid fa-handshake text-3xl text-emerald-700"></i> Proven Creative Structures Only</div>
-      <div class="flex items-center gap-4"><i class="fa-solid fa-shield-halved text-3xl text-emerald-700"></i> Brokers: Full Commission Protected</div>
-      <div class="flex items-center gap-4"><i class="fa-solid fa-chart-line text-3xl text-emerald-700"></i> Value-Add & Stabilization Experts</div>
-      <div class="flex items-center gap-4"><i class="fa-solid fa-robot text-3xl text-emerald-700"></i> Rapid Qualification: AI + Expert Review</div>
-    </div>
+    <p class="text-sm md:text-base text-white/75">
+      Rhode Island roots • Coast-to-coast network • Creative structures for parks traditional lenders often avoid
+    </p>
   </div>
 
-  <!-- Tabs Section – Cleaner, more spacing -->
-  <div class="max-w-6xl mx-auto px-6 py-20">
-    <div class="flex border-b mb-12 overflow-x-auto">
-      <button onclick="switchTab(0)" id="tab0" class="tab-active px-12 py-5 text-2xl whitespace-nowrap">I'm a Seller or Broker</button>
-      <button onclick="switchTab(1)" id="tab1" class="px-12 py-5 text-2xl whitespace-nowrap">I'm a Buyer</button>
-    </div>
-
-    <!-- SELLER / BROKER -->
-    <div id="panel0" class="tab-panel">
-      <div class="grid md:grid-cols-2 gap-16">
-        <div>
-          <h2 class="text-5xl font-extrabold mb-8 leading-tight">Secure a Premium Match for Your Park</h2>
-          <p class="text-xl text-gray-700 mb-10">Share your details — our experienced team and AI qualify creative-fit opportunities swiftly, connecting you exclusively to serious, capable buyers focused on elegant closings.</p>
-          <div class="space-y-8 text-lg">
-            <div class="flex gap-5"><i class="fa-solid fa-check-circle text-3xl text-emerald-700 mt-1"></i> Complex or mismanaged records? We navigate professionally.</div>
-            <div class="flex gap-5"><i class="fa-solid fa-check-circle text-3xl text-emerald-700 mt-1"></i> Flexible structures: seller carry, interest-only, balloons, earn-outs — tailored for optimal outcomes.</div>
-            <div class="flex gap-5"><i class="fa-solid fa-check-circle text-3xl text-emerald-700 mt-1"></i> Brokers receive full commission protection — guaranteed in writing before offers.</div>
-          </div>
+  <div class="mt-12 md:mt-16 max-w-6xl">
+    <div class="soft-card rounded-[2rem] p-6 md:p-8 lg:p-10 text-slate-900 grid md:grid-cols-3 gap-6 md:gap-8">
+      <div class="flex gap-4">
+        <div class="h-12 w-12 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0">
+          <i class="fa-solid fa-user-check text-xl"></i>
         </div>
+        <div>
+          <h3 class="text-2xl font-black mb-2">Access Proven Buyers</h3>
+          <p class="text-slate-700 leading-relaxed">We connect owners and brokers to serious, qualified buyers already looking for the right creative-fit opportunity.</p>
+        </div>
+      </div>
 
-        <form id="sellerForm" onsubmit="handleSellerSubmit(event)" class="space-y-8 bg-white p-12 rounded-3xl shadow-2xl border border-gray-100">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            <div>
-              <label class="block text-sm font-semibold mb-2">Your Name</label>
-              <input type="text" id="s_name" required class="w-full border border-gray-300 rounded-2xl px-6 py-5 text-lg focus:border-emerald-700">
-            </div>
-            <div>
-              <label class="block text-sm font-semibold mb-2">Phone (for prompt review)</label>
-              <input type="tel" id="s_phone" required class="w-full border border-gray-300 rounded-2xl px-6 py-5 text-lg focus:border-emerald-700">
-            </div>
-          </div>
-          <div>
-            <label class="block text-sm font-semibold mb-2">Email</label>
-            <input type="email" id="s_email" required class="w-full border border-gray-300 rounded-2xl px-6 py-5 text-lg focus:border-emerald-700">
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            <div>
-              <label class="block text-sm font-semibold mb-2">Role</label>
-              <select id="s_role" onchange="toggleBrokerField()" class="w-full border border-gray-300 rounded-2xl px-6 py-5 text-lg focus:border-emerald-700">
-                <option value="seller">Seller / Owner</option>
-                <option value="broker">Broker</option>
-              </select>
-            </div>
-            <div id="brokerCommission" class="hidden">
-              <label class="block text-sm font-semibold mb-2">Commission %</label>
-              <input type="text" id="s_commission" value="6" class="w-full border border-gray-300 rounded-2xl px-6 py-5 text-lg focus:border-emerald-700">
-            </div>
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            <div>
-              <label class="block text-sm font-semibold mb-2">State</label>
-              <input type="text" id="s_state" required placeholder="e.g. Texas" class="w-full border border-gray-300 rounded-2xl px-6 py-5 text-lg focus:border-emerald-700">
-            </div>
-            <div>
-              <label class="block text-sm font-semibold mb-2">Number of Sites</label>
-              <input type="number" id="s_sites" required class="w-full border border-gray-300 rounded-2xl px-6 py-5 text-lg focus:border-emerald-700">
-            </div>
-          </div>
-          <div>
-            <label class="block text-sm font-semibold mb-2">Asking Price</label>
-            <input type="text" id="s_price" required placeholder="$1,250,000" class="w-full border border-gray-300 rounded-2xl px-6 py-5 text-lg focus:border-emerald-700">
-          </div>
-          <div>
-            <label class="block text-sm font-semibold mb-2">Primary Challenge? (e.g., occupancy, financing history)</label>
-            <textarea id="s_notes" rows="4" class="w-full border border-gray-300 rounded-3xl px-6 py-5 text-lg focus:border-emerald-700"></textarea>
-          </div>
-          <button type="submit" id="sellerBtn" class="w-full bg-emerald-800 hover:bg-emerald-900 text-white py-6 rounded-full text-xl font-bold shadow-lg transition min-h-[64px] flex items-center justify-center gap-3">
-            Submit Securely – Begin Matching
-          </button>
-          <p class="text-center text-sm text-gray-500">Confidential — used solely for premium matching. Brokers: protection confirmed upfront.</p>
-        </form>
+      <div class="flex gap-4">
+        <div class="h-12 w-12 rounded-2xl bg-amber-100 text-orange-700 flex items-center justify-center shrink-0">
+          <i class="fa-regular fa-lightbulb text-xl"></i>
+        </div>
+        <div>
+          <h3 class="text-2xl font-black mb-2">Creative Financing Solutions</h3>
+          <p class="text-slate-700 leading-relaxed">Secure higher prices and smoother exits with partial cash, seller carry, and flexible structures traditional lenders often will not touch.</p>
+        </div>
+      </div>
+
+      <div class="flex gap-4">
+        <div class="h-12 w-12 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0">
+          <i class="fa-solid fa-handshake-angle text-xl"></i>
+        </div>
+        <div>
+          <h3 class="text-2xl font-black mb-2">Expert Guidance</h3>
+          <p class="text-slate-700 leading-relaxed">Partner with a relationship-driven team focused on practical structure, clean communication, and elegant closings.</p>
+        </div>
       </div>
     </div>
+  </div>
+</div>
 
-    <!-- BUYER FORM – Similar premium tweaks -->
-    <div id="panel1" class="tab-panel hidden">
-      <div class="grid md:grid-cols-2 gap-16">
-        <div>
-          <h2 class="text-5xl font-extrabold mb-8 leading-tight">Curate Your Exclusive Buy Box</h2>
-          <p class="text-xl text-gray-700">Our discerning network (including sophisticated investors) receives priority access to off-market creative opportunities. Precision yields the finest matches.</p>
+  </header>  <section class="bg-white border-y border-black/5 py-5">
+    <div class="max-w-7xl mx-auto px-5 md:px-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 text-sm md:text-[15px] font-semibold text-slate-700">
+      <div class="trust-card rounded-2xl px-4 py-4 flex items-center gap-3"><i class="fa-solid fa-route text-emerald-800"></i> Nationwide reach</div>
+      <div class="trust-card rounded-2xl px-4 py-4 flex items-center gap-3"><i class="fa-solid fa-file-signature text-emerald-800"></i> Flexible structuring</div>
+      <div class="trust-card rounded-2xl px-4 py-4 flex items-center gap-3"><i class="fa-solid fa-shield-halved text-emerald-800"></i> Broker-safe process</div>
+      <div class="trust-card rounded-2xl px-4 py-4 flex items-center gap-3"><i class="fa-solid fa-bolt text-emerald-800"></i> Fast qualification</div>
+    </div>
+  </section>  <section id="why-us" class="section-anchor py-20 md:py-24 bg-stone-50">
+    <div class="max-w-7xl mx-auto px-5 md:px-6">
+      <div class="max-w-3xl mb-12">
+        <p class="uppercase tracking-[0.22em] text-xs md:text-sm font-extrabold text-orange-700 mb-4">Why owners call us</p>
+        <h2 class="text-4xl md:text-5xl font-black tracking-tight mb-5">Built for the deals that do not fit a bank box.</h2>
+        <p class="text-lg md:text-xl text-slate-700 leading-relaxed">Owners usually do not call because the deal is easy. They call because the park is good, but the path to closing is not conventional.</p>
+      </div><div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="trust-card rounded-3xl p-7">
+      <h3 class="text-2xl font-black mb-3">Retiring owners</h3>
+      <p class="text-slate-700">When timing matters more than endless tours, we help structure clean exits with practical terms.</p>
+    </div>
+    <div class="trust-card rounded-3xl p-7">
+      <h3 class="text-2xl font-black mb-3">Complex books</h3>
+      <p class="text-slate-700">Underreported income, inconsistent records, and lender friction do not automatically kill a good opportunity.</p>
+    </div>
+    <div class="trust-card rounded-3xl p-7">
+      <h3 class="text-2xl font-black mb-3">Legacy financing</h3>
+      <p class="text-slate-700">Seller-financed deals, older notes, and unusual structures often need a creative buyer and a steady hand.</p>
+    </div>
+    <div class="trust-card rounded-3xl p-7">
+      <h3 class="text-2xl font-black mb-3">Inherited parks</h3>
+      <p class="text-slate-700">For heirs or families navigating a transition, we keep the process simple, respectful, and confidential.</p>
+    </div>
+    <div class="trust-card rounded-3xl p-7">
+      <h3 class="text-2xl font-black mb-3">Brokered opportunities</h3>
+      <p class="text-slate-700">Bring us the hard-to-place park. We protect commissions in writing and look for workable structure first.</p>
+    </div>
+    <div class="rounded-3xl p-7 bg-emerald-950 text-white shadow-2xl shadow-emerald-950/10">
+      <h3 class="text-2xl font-black mb-3">Our edge</h3>
+      <p class="text-white/85">We structure solutions traditional banks and many traditional buyers simply will not pursue.</p>
+    </div>
+  </div>
+</div>
+
+  </section>  <section id="seller" class="section-anchor max-w-7xl mx-auto px-5 md:px-6 py-20 md:py-24">
+    <div class="bg-white rounded-[2rem] shadow-xl shadow-emerald-950/5 border border-black/5 overflow-hidden">
+      <div class="px-4 sm:px-6 md:px-8 pt-6 md:pt-8">
+        <div class="inline-flex rounded-2xl bg-stone-100 p-1 border border-black/5 overflow-auto">
+          <button onclick="switchTab(0)" id="tab0" class="tab-active px-5 md:px-8 py-3 md:py-4 text-base md:text-lg rounded-2xl whitespace-nowrap border border-transparent">I'm a Seller or Broker</button>
+          <button onclick="switchTab(1)" id="tab1" class="px-5 md:px-8 py-3 md:py-4 text-base md:text-lg rounded-2xl whitespace-nowrap border border-transparent text-slate-600">I'm a Buyer</button>
+        </div>
+      </div><div id="panel0" class="tab-panel px-4 sm:px-6 md:px-8 py-8 md:py-10">
+    <div class="grid lg:grid-cols-[1.02fr,1fr] gap-10 lg:gap-14 items-start">
+      <div>
+        <p class="uppercase tracking-[0.22em] text-xs md:text-sm font-extrabold text-orange-700 mb-4">For sellers & brokers</p>
+        <h2 class="text-4xl md:text-5xl font-black leading-tight tracking-tight mb-5">Secure a premium match for your park.</h2>
+        <p class="text-lg md:text-xl text-slate-700 mb-8 leading-relaxed">Share the basics. We qualify creative-fit opportunities quickly and connect you with serious buyers focused on real structure and actual closings.</p>
+
+        <div class="space-y-5 mb-8">
+          <div class="flex gap-4"><i class="fa-solid fa-circle-check text-2xl text-emerald-700 mt-1"></i><p class="text-slate-700 text-lg">We understand parks with lender friction, unusual books, legacy notes, and imperfect history.</p></div>
+          <div class="flex gap-4"><i class="fa-solid fa-circle-check text-2xl text-emerald-700 mt-1"></i><p class="text-slate-700 text-lg">Seller carry, balloons, hybrid cash, and custom structures can all be part of the conversation.</p></div>
+          <div class="flex gap-4"><i class="fa-solid fa-circle-check text-2xl text-emerald-700 mt-1"></i><p class="text-slate-700 text-lg">Broker commissions are protected in writing before offers are presented.</p></div>
         </div>
 
-        <form id="buyerForm" onsubmit="handleBuyerSubmit(event)" class="space-y-8 bg-white p-12 rounded-3xl shadow-2xl border border-gray-100">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            <div>
-              <label class="block text-sm font-semibold mb-2">Name</label>
-              <input type="text" id="b_name" required class="w-full border border-gray-300 rounded-2xl px-6 py-5 text-lg focus:border-emerald-700">
-            </div>
-            <div>
-              <label class="block text-sm font-semibold mb-2">Email</label>
-              <input type="email" id="b_email" required class="w-full border border-gray-300 rounded-2xl px-6 py-5 text-lg focus:border-emerald-700">
-            </div>
+        <div class="rounded-3xl bg-stone-50 border border-black/5 p-6">
+          <h3 class="text-2xl font-black mb-4">Current acquisition focus</h3>
+          <div class="grid sm:grid-cols-2 gap-3 text-slate-700 font-medium">
+            <div class="flex items-center gap-3"><i class="fa-solid fa-location-dot text-orange-700"></i> Nationwide opportunities</div>
+            <div class="flex items-center gap-3"><i class="fa-solid fa-layer-group text-orange-700"></i> Value-add RV parks</div>
+            <div class="flex items-center gap-3"><i class="fa-solid fa-road text-orange-700"></i> Expansion potential</div>
+            <div class="flex items-center gap-3"><i class="fa-solid fa-users-viewfinder text-orange-700"></i> Active buyers looking now</div>
+          </div>
+        </div>
+      </div>
+
+      <form id="sellerForm" onsubmit="handleSellerSubmit(event)" class="bg-[linear-gradient(180deg,#ffffff,#faf7f2)] border border-black/5 rounded-[2rem] p-6 md:p-8 shadow-xl shadow-emerald-950/5 space-y-6">
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label class="block text-sm font-bold mb-2">Your Name</label>
+            <input type="text" id="s_name" required class="w-full border border-slate-300 rounded-2xl px-5 py-4 text-base" />
           </div>
           <div>
-            <label class="block text-sm font-semibold mb-2">Phone (for priority routing)</label>
-            <input type="tel" id="b_phone" class="w-full border border-gray-300 rounded-2xl px-6 py-5 text-lg focus:border-emerald-700">
+            <label class="block text-sm font-bold mb-2">Phone</label>
+            <input type="tel" id="s_phone" required class="w-full border border-slate-300 rounded-2xl px-5 py-4 text-base" />
           </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-bold mb-2">Email</label>
+          <input type="email" id="s_email" required class="w-full border border-slate-300 rounded-2xl px-5 py-4 text-base" />
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-5">
           <div>
-            <label class="block text-sm font-semibold mb-2">Preferred States / Regions</label>
-            <input type="text" id="b_states" placeholder="Nationwide, Southeast, Mountain West..." class="w-full border border-gray-300 rounded-2xl px-6 py-5 text-lg focus:border-emerald-700">
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            <div>
-              <label class="block text-sm font-semibold mb-2">Minimum Sites</label>
-              <input type="number" id="b_min_sites" class="w-full border border-gray-300 rounded-2xl px-6 py-5 text-lg focus:border-emerald-700">
-            </div>
-            <div>
-              <label class="block text-sm font-semibold mb-2">Maximum Price</label>
-              <input type="text" id="b_max_price" placeholder="$5M" class="w-full border border-gray-300 rounded-2xl px-6 py-5 text-lg focus:border-emerald-700">
-            </div>
-          </div>
-          <div>
-            <label class="block text-sm font-semibold mb-2">Preferred Creative Approach</label>
-            <select id="b_creative" class="w-full border border-gray-300 rounded-2xl px-6 py-5 text-lg focus:border-emerald-700">
-              <option value="">Flexible on Structure</option>
-              <option value="seller-carry">Seller Carry / Owner Finance (Highly Sought)</option>
-              <option value="hybrid">Hybrid Cash + Carry</option>
-              <option value="subto">Sub-To / Subject-To Style</option>
+            <label class="block text-sm font-bold mb-2">Role</label>
+            <select id="s_role" onchange="toggleBrokerField()" class="w-full border border-slate-300 rounded-2xl px-5 py-4 text-base">
+              <option value="seller">Seller / Owner</option>
+              <option value="broker">Broker</option>
             </select>
           </div>
-          <div>
-            <label class="block text-sm font-semibold mb-2">Key Preferences / Notes (e.g., value-add potential, proximity to attractions)</label>
-            <textarea id="b_notes" rows="4" class="w-full border border-gray-300 rounded-3xl px-6 py-5 text-lg focus:border-emerald-700"></textarea>
+          <div id="brokerCommission" class="hidden">
+            <label class="block text-sm font-bold mb-2">Commission %</label>
+            <input type="text" id="s_commission" value="6" class="w-full border border-slate-300 rounded-2xl px-5 py-4 text-base" />
           </div>
-          <button type="submit" id="buyerBtn" class="w-full bg-orange-700 hover:bg-orange-800 text-white py-6 rounded-full text-xl font-bold shadow-lg transition min-h-[64px]">
-            Secure My Criteria – Access Elite Opportunities
-          </button>
-        </form>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label class="block text-sm font-bold mb-2">State</label>
+            <input type="text" id="s_state" required placeholder="e.g. Texas" class="w-full border border-slate-300 rounded-2xl px-5 py-4 text-base" />
+          </div>
+          <div>
+            <label class="block text-sm font-bold mb-2">Number of Sites</label>
+            <input type="number" id="s_sites" required class="w-full border border-slate-300 rounded-2xl px-5 py-4 text-base" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-bold mb-2">Asking Price</label>
+          <input type="text" id="s_price" required placeholder="$1,250,000" class="w-full border border-slate-300 rounded-2xl px-5 py-4 text-base" />
+        </div>
+
+        <div>
+          <label class="block text-sm font-bold mb-2">What is the main challenge?</label>
+          <textarea id="s_notes" rows="4" placeholder="Occupancy, financing history, inherited park, deferred maintenance, seller financing needed..." class="w-full border border-slate-300 rounded-[1.5rem] px-5 py-4 text-base"></textarea>
+        </div>
+
+        <button type="submit" id="sellerBtn" class="w-full bg-orange-700 hover:bg-orange-800 text-white py-4.5 rounded-full text-lg md:text-xl font-bold shadow-lg shadow-orange-950/15 transition">
+          Submit Park Details
+        </button>
+        <p class="text-center text-sm text-slate-500">Confidential. Used only to review fit and discuss next steps.</p>
+      </form>
+    </div>
+  </div>
+
+  <div id="panel1" class="tab-panel hidden px-4 sm:px-6 md:px-8 py-8 md:py-10">
+    <div class="grid lg:grid-cols-[1.02fr,1fr] gap-10 lg:gap-14 items-start">
+      <div>
+        <p class="uppercase tracking-[0.22em] text-xs md:text-sm font-extrabold text-emerald-700 mb-4">For buyers</p>
+        <h2 class="text-4xl md:text-5xl font-black leading-tight tracking-tight mb-5">Define your buy box clearly. Get better opportunities.</h2>
+        <p class="text-lg md:text-xl text-slate-700 mb-8 leading-relaxed">Serious criteria helps us route the right deals faster. Tell us what you buy, where you buy, and what structure you can handle.</p>
+
+        <div class="space-y-5 mb-8">
+          <div class="flex gap-4"><i class="fa-solid fa-circle-check text-2xl text-emerald-700 mt-1"></i><p class="text-slate-700 text-lg">Priority access to creative opportunities and brokered submissions that match your actual box.</p></div>
+          <div class="flex gap-4"><i class="fa-solid fa-circle-check text-2xl text-emerald-700 mt-1"></i><p class="text-slate-700 text-lg">Designed for operators, capital partners, and buyers comfortable with real-world structure.</p></div>
+          <div class="flex gap-4"><i class="fa-solid fa-circle-check text-2xl text-emerald-700 mt-1"></i><p class="text-slate-700 text-lg">The more precise your criteria, the better the deal flow we can send you.</p></div>
+        </div>
+
+        <div class="rounded-3xl bg-stone-50 border border-black/5 p-6">
+          <h3 class="text-2xl font-black mb-4">Typical buyer preferences</h3>
+          <div class="grid sm:grid-cols-2 gap-3 text-slate-700 font-medium">
+            <div class="flex items-center gap-3"><i class="fa-solid fa-money-bill-trend-up text-emerald-700"></i> Value-add upside</div>
+            <div class="flex items-center gap-3"><i class="fa-solid fa-map text-emerald-700"></i> Target regions or nationwide</div>
+            <div class="flex items-center gap-3"><i class="fa-solid fa-file-invoice-dollar text-emerald-700"></i> Seller carry / hybrid deals</div>
+            <div class="flex items-center gap-3"><i class="fa-solid fa-campground text-emerald-700"></i> Expansion potential</div>
+          </div>
+        </div>
+      </div>
+
+      <form id="buyerForm" onsubmit="handleBuyerSubmit(event)" class="bg-[linear-gradient(180deg,#ffffff,#f5faf8)] border border-black/5 rounded-[2rem] p-6 md:p-8 shadow-xl shadow-emerald-950/5 space-y-6">
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label class="block text-sm font-bold mb-2">Name</label>
+            <input type="text" id="b_name" required class="w-full border border-slate-300 rounded-2xl px-5 py-4 text-base" />
+          </div>
+          <div>
+            <label class="block text-sm font-bold mb-2">Email</label>
+            <input type="email" id="b_email" required class="w-full border border-slate-300 rounded-2xl px-5 py-4 text-base" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-bold mb-2">Phone</label>
+          <input type="tel" id="b_phone" class="w-full border border-slate-300 rounded-2xl px-5 py-4 text-base" />
+        </div>
+
+        <div>
+          <label class="block text-sm font-bold mb-2">Preferred States / Regions</label>
+          <input type="text" id="b_states" placeholder="Nationwide, Southeast, Mountain West..." class="w-full border border-slate-300 rounded-2xl px-5 py-4 text-base" />
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label class="block text-sm font-bold mb-2">Minimum Sites</label>
+            <input type="number" id="b_min_sites" class="w-full border border-slate-300 rounded-2xl px-5 py-4 text-base" />
+          </div>
+          <div>
+            <label class="block text-sm font-bold mb-2">Maximum Price</label>
+            <input type="text" id="b_max_price" placeholder="$5M" class="w-full border border-slate-300 rounded-2xl px-5 py-4 text-base" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-bold mb-2">Preferred Creative Approach</label>
+          <select id="b_creative" class="w-full border border-slate-300 rounded-2xl px-5 py-4 text-base">
+            <option value="">Flexible on Structure</option>
+            <option value="seller-carry">Seller Carry / Owner Finance</option>
+            <option value="hybrid">Hybrid Cash + Carry</option>
+            <option value="subto">Sub-To / Subject-To Style</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-sm font-bold mb-2">Notes</label>
+          <textarea id="b_notes" rows="4" placeholder="Value-add, market types, expansion, turnaround, broker-friendly, timing..." class="w-full border border-slate-300 rounded-[1.5rem] px-5 py-4 text-base"></textarea>
+        </div>
+
+        <button type="submit" id="buyerBtn" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-4.5 rounded-full text-lg md:text-xl font-bold shadow-lg shadow-emerald-950/15 transition">
+          Submit Your Buy Box
+        </button>
+        <p class="text-center text-sm text-slate-500">We review every submission for fit before routing opportunities.</p>
+      </form>
+    </div>
+  </div>
+</div>
+
+  </section>  <section id="how" class="section-anchor py-20 md:py-24 bg-white border-y border-black/5">
+    <div class="max-w-7xl mx-auto px-5 md:px-6">
+      <div class="max-w-3xl mb-12">
+        <p class="uppercase tracking-[0.22em] text-xs md:text-sm font-extrabold text-orange-700 mb-4">How it works</p>
+        <h2 class="text-4xl md:text-5xl font-black tracking-tight mb-5">A cleaner process for messy deals.</h2>
+        <p class="text-lg md:text-xl text-slate-700">Simple on the front end. Thoughtful where it matters.</p>
+      </div><div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="trust-card rounded-3xl p-7">
+      <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-2xl font-black mb-5">1</div>
+      <h4 class="font-black text-2xl mb-3">Submit confidentially</h4>
+      <p class="text-slate-700">You share the basics. No fluff, no pressure, no unnecessary complexity.</p>
+    </div>
+    <div class="trust-card rounded-3xl p-7">
+      <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-2xl font-black mb-5">2</div>
+      <h4 class="font-black text-2xl mb-3">Review fit</h4>
+      <p class="text-slate-700">We look at the park, the people, and the structure needed to make the deal workable.</p>
+    </div>
+    <div class="trust-card rounded-3xl p-7">
+      <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-2xl font-black mb-5">3</div>
+      <h4 class="font-black text-2xl mb-3">Match intelligently</h4>
+      <p class="text-slate-700">Qualified buyers and relevant opportunities are aligned based on actual criteria, not wishful thinking.</p>
+    </div>
+    <div class="trust-card rounded-3xl p-7">
+      <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-2xl font-black mb-5">4</div>
+      <h4 class="font-black text-2xl mb-3">Close elegantly</h4>
+      <p class="text-slate-700">The focus stays on practical terms, clean communication, and getting everyone to the finish line.</p>
+    </div>
+  </div>
+</div>
+
+  </section>  <section class="py-20 md:py-24 bg-stone-50">
+    <div class="max-w-7xl mx-auto px-5 md:px-6">
+      <div class="rounded-[2rem] bg-emerald-950 text-white p-8 md:p-12 shadow-2xl shadow-emerald-950/10 flex flex-col lg:flex-row gap-8 lg:items-center lg:justify-between">
+        <div class="max-w-3xl">
+          <p class="uppercase tracking-[0.22em] text-xs md:text-sm font-extrabold text-orange-300 mb-4">Ready to start</p>
+          <h2 class="text-3xl md:text-5xl font-black tracking-tight mb-4">Whether you are selling, brokering, or buying, clarity wins.</h2>
+          <p class="text-white/80 text-lg md:text-xl">Tell us what the deal is, what the challenge is, or what your buy box looks like. We will take it from there.</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4 shrink-0">
+          <a href="#seller" onclick="switchTab(0)" class="bg-orange-700 hover:bg-orange-800 text-white px-8 py-4 rounded-full font-bold text-lg text-center">Sell My RV Park</a>
+          <a href="#buyer" onclick="switchTab(1)" class="bg-white text-emerald-950 hover:bg-stone-100 px-8 py-4 rounded-full font-bold text-lg text-center">Submit Buy Box</a>
+        </div>
       </div>
     </div>
-  </div>
-
-  <!-- Success Modal – More premium -->
-  <div id="successModal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[100]">
-    <div class="bg-white rounded-3xl p-16 max-w-lg text-center success-modal shadow-2xl">
-      <i class="fa-solid fa-check-circle text-8xl text-emerald-700 mb-8"></i>
-      <h3 class="text-4xl font-extrabold mb-4">Thank You</h3>
-      <p class="text-xl text-gray-700 mb-10" id="modalMessage">Your submission is received. Our team will review promptly and connect you with premium opportunities.</p>
-      <button onclick="closeModal()" class="bg-emerald-800 text-white px-12 py-5 rounded-full text-xl font-bold shadow-lg transition">Return to Site</button>
+  </section>  <div id="successModal" class="hidden fixed inset-0 bg-black/75 flex items-center justify-center z-[100] px-5">
+    <div class="bg-white rounded-[2rem] p-8 md:p-12 max-w-xl w-full text-center success-modal shadow-2xl">
+      <i class="fa-solid fa-circle-check text-7xl text-emerald-700 mb-6"></i>
+      <h3 class="text-3xl md:text-4xl font-black mb-3">Thanks — we got it.</h3>
+      <p class="text-lg text-slate-700 mb-8" id="modalMessage">Your submission has been received and will be reviewed shortly.</p>
+      <button onclick="closeModal()" class="bg-emerald-800 hover:bg-emerald-900 text-white px-10 py-4 rounded-full text-lg font-bold transition">Return to Site</button>
     </div>
-  </div>
-
-  <!-- How it works – Premium icons, spacing -->
-  <div id="how" class="bg-gray-50 py-24">
-    <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-5xl font-extrabold text-center mb-20">Our Elegant Process – Efficient & Trusted</h2>
-      <div class="grid md:grid-cols-4 gap-12">
-        <div class="text-center">
-          <div class="w-20 h-20 mx-auto bg-emerald-100 rounded-full flex items-center justify-center text-5xl font-bold mb-8 text-emerald-800">1</div>
-          <h4 class="font-extrabold text-2xl mb-4">Submit Confidentially</h4>
-          <p class="text-gray-700 text-lg">Quick, secure form in under 5 minutes</p>
-        </div>
-        <div class="text-center">
-          <div class="w-20 h-20 mx-auto bg-emerald-100 rounded-full flex items-center justify-center text-5xl font-bold mb-8 text-emerald-800">2</div>
-          <h4 class="font-extrabold text-2xl mb-4">Expert Qualification</h4>
-          <p class="text-gray-700 text-lg">AI-assisted + human review for precise fit</p>
-        </div>
-        <div class="text-center">
-          <div class="w-20 h-20 mx-auto bg-emerald-100 rounded-full flex items-center justify-center text-5xl font-bold mb-8 text-emerald-800">3</div>
-          <h4 class="font-extrabold text-2xl mb-4">Premium Matching</h4>
-          <p class="text-gray-700 text-lg">Directed to vetted, motivated parties</p>
-        </div>
-        <div class="text-center">
-          <div class="w-20 h-20 mx-auto bg-emerald-100 rounded-full flex items-center justify-center text-5xl font-bold mb-8 text-emerald-800">4</div>
-          <h4 class="font-extrabold text-2xl mb-4">Elegant Closing</h4>
-          <p class="text-gray-700 text-lg">Creative terms, commissions honored, mutual success</p>
-        </div>
-      </div>
+  </div>  <footer class="bg-[#0b1714] text-white py-14 md:py-16">
+    <div class="max-w-7xl mx-auto px-5 md:px-6 text-center">
+      <p class="text-2xl md:text-3xl font-black mb-4">RV Park Acquisitions</p>
+      <p class="text-white/75 text-base md:text-lg mb-3">Creative structures for owners, brokers, and buyers in outdoor hospitality.</p>
+      <p class="text-white/50 text-sm">Nationwide network • Rhode Island roots • Focused on workable deals, not wasted motion</p>
     </div>
-  </div>
-
-  <footer class="bg-emerald-950 text-white py-20">
-    <div class="max-w-7xl mx-auto px-6 text-center">
-      <p class="text-3xl font-bold mb-6">RV Park Acquisitions</p>
-      <p class="text-xl opacity-80 mb-4">Elevating creative opportunities in outdoor hospitality • Nationwide since Rhode Island</p>
-      <p class="text-sm opacity-60 mt-12">Exclusively for discerning investors and owners seeking sophisticated solutions beyond conventional finance.</p>
-    </div>
-  </footer>
-
-  <script>
+  </footer>  <script>
     function switchTab(n) {
       document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
       document.getElementById('panel' + n).classList.remove('hidden');
-      document.querySelectorAll('button[id^="tab"]').forEach(b => b.classList.remove('tab-active'));
-      document.getElementById('tab' + n).classList.add('tab-active');
+      document.querySelectorAll('button[id^="tab"]').forEach(b => {
+        b.classList.remove('tab-active');
+        b.classList.add('text-slate-600');
+      });
+      const active = document.getElementById('tab' + n);
+      active.classList.add('tab-active');
+      active.classList.remove('text-slate-600');
     }
 
     function toggleBrokerField() {
@@ -271,13 +469,13 @@
 
     function handleSellerSubmit(e) {
       e.preventDefault();
-      document.getElementById('modalMessage').textContent = "Seller/Broker details received. Our team will qualify and protect your interests — expect contact shortly.";
+      document.getElementById('modalMessage').textContent = 'Seller or broker details received. We will review fit and reach out shortly.';
       document.getElementById('successModal').classList.remove('hidden');
     }
 
     function handleBuyerSubmit(e) {
       e.preventDefault();
-      document.getElementById('modalMessage').textContent = "Your premium buy box is noted. Exclusive creative matches incoming soon.";
+      document.getElementById('modalMessage').textContent = 'Your buy box has been received. We will review your criteria and route relevant opportunities.';
       document.getElementById('successModal').classList.remove('hidden');
     }
 
@@ -285,8 +483,6 @@
       document.getElementById('successModal').classList.add('hidden');
     }
 
-    // Basic auto-save (expand as needed)
     window.onload = () => switchTab(0);
-  </script>
-</body>
+  </script></body>
 </html>
